@@ -90,7 +90,7 @@ class Family
   index({"households.tax_households.eligibility_determinations.max_aptc.cents" => 1})
 
   index({"irs_groups.hbx_assigned_id" => 1})
-
+  index({"family_members.person_id" => 1, hbx_assigned_id: 1})
   # index("households.tax_households_id")
 
   validates :renewal_consent_through_year,
@@ -336,6 +336,11 @@ class Family
   def active_seps
     special_enrollment_periods.find_all { |sep| sep.is_active? }
   end
+
+  def active_admin_seps
+    special_enrollment_periods.find_all { |sep| sep.is_active? && sep.admin_flag }
+  end
+  
 
   # single SEP with latest end date from list of active SEPs
   def current_sep
