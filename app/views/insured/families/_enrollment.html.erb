@@ -161,10 +161,10 @@
 
 <div class="panel-footer">
   <div class="vertically-aligned-row">
-    <div>
+    <div class="col-lg-5">
       <%= render partial: "shared/plan_shoppings/sbc_link", locals: { plan: plan } %>
     </div>
-    <div>
+    <div class="col-lg-4">
       <a class="vertically-aligned-row" data-target="#<%= plan.coverage_kind %>-<%= plan.id %>" data-toggle="modal">
         <i class="fa fa-phone fa-2x pull-left"></i>
         <span>Carrier Contact Info</span>
@@ -187,6 +187,17 @@
         </div>
       </div>
     <% end %>
+  </div>
+</div>
+<div class="panel-footer">
+  <div class="vertically-aligned-row">
+      <div class="col-lg-3">
+      <%= link_to(events_policy_path(:id => hbx_enrollment.hbx_id, :format => :xml), :class => "", :target => "_blank") do %>
+        <i class ="fa fa-arrow-circle-o-down fa-2x pull-left"></i>
+	<span>Download</span>
+      <% end %>
+      </div>
+      <div class="col-lg-9"></div>
   </div>
 </div>
 </div>

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get 'reset_user_clock' => 'session_timeout#reset_user_clock', :constraints => { :only_ajax => true }
   post 'show_hints' => 'welcome#show_hints', :constraints => { :only_ajax => true }
 
+  namespace :events do
+    resources :policies, only: [:show]
+  end
+
   namespace :users do
     resources :orphans, only: [:index, :show, :destroy]
   end

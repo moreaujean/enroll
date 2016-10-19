@@ -2,6 +2,17 @@ module Events
   class PoliciesController < ::ApplicationController
     include Acapi::Amqp::Responder
 
+    def show
+      policy = HbxEnrollment.by_hbx_id(params[:id]).first
+      if policy
+        respond_to do |format|
+          format.xml { render("events/hbx_enrollment/policy", :locals => { :hbx_enrollment => policy }) }
+        end
+      else
+        render :nothing => true, :status => "404"
+      end
+    end
+
     def resource(connection, delivery_info, properties, body)
       reply_to = properties.reply_to
       headers = properties.headers || {}
